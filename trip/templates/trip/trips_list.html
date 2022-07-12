@@ -1,0 +1,27 @@
+{% extends 'trip/_base.html' %}
+
+{% block content %}
+<h1 class="text-4xl underline underline-offset-4 mb-8">My Trips</h1>
+{% for trip in trips %}
+    <a href="{% url 'trip-detail' trip.pk %}">
+        <div class="bg-gray-50 p-10 rounded shadow my-4 hover:shadow-lg hover:cursor-pointer">
+            <p class="text-lg">
+                {{trip.country}} | {{trip.city}}
+            </p>
+            <p class="text-sm pt-4">
+                {% if trip.start_date %}
+                {{ trip.start_date|date:"F jS" }}
+                {% else %}
+                TBA
+                {% endif %}
+                to
+                {% if trip.end_date %}
+                {{ trip.end_date|date:"F jS" }}
+                {% else %}
+                TBA
+                {% endif %}
+            </p>
+        </div>
+    </a>
+{% endfor %}
+{% endblock content %}

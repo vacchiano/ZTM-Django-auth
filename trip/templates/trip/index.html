@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <header class="text-gray-600 body-font border-b">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <span class="ml-3 text-xl">📌 TripTrak</span>
+          </a>
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="mr-5 hover:text-gray-900">Login</a>
+            {% else %}
+            <a href="{% url 'logout' %}" class="mr-5 hover:text-gray-900">Logout</a>
+            {% endif %}
+          </nav>
+          <a {% if user.is_authenticated %} href="{% url 'trip-list' %}" {% else %} href="{% url 'signup' %}" {% endif %}>
+              <button class="inline-flex items-center bg-green-200 border-0 py-2 px-5 focus:outline-none hover:bg-green-300 rounded text-base mt-4 md:mt-0">
+                {% if user.is_authenticated %}
+                Dashboard
+                {% else %}
+                Signup
+                {% endif %}
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+                </button>
+            </a>
+        </div>
+      </header>
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+            <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">Keep track of all your adventures, never forget the amazing memories.</h1>
+            {% if user.is_authenticated %}
+            <a href="{% url 'trip-list' %}">
+                <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">Dashboard</button>
+            </a>
+            {% else %}
+            <a href="{% url 'signup' %}">
+                <button class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">Signup</button>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+</body>
+</html>

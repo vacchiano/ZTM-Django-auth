@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+<body>
+    <div class="flex-col md:flex-row flex h-screen">
+        <div class="md:h-screen bg-gray-700 text-white w-full md:w-1/4 md:max-w-xs py-2 md:pt-8 md:pb-2 flex flex-col items-center justify-start border-r">
+            <div class="border-b w-full text-center pb-4 text-2xl">
+                <h1>📌 Trip Trak</h1>
+            </div>
+            <div class="pt-4 w-full text-center">
+                <ul class="flex md:flex-col justify-around px-2 md:px-0 pb-2 md:pb-0">
+                    <a href="{% url 'trip-list' %}">
+                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">My Trips</li>
+                    </a>
+                    <a href="{% url 'trip-create' %}">
+                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">New Trip +</li>
+                    </a>
+                    <a href="{% url 'note-list' %}">
+                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">My Notes</li>
+                    </a>
+                    <a href="{% url 'note-create' %}">
+                    <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">New Note +</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="mt-auto w-full text-center flex md:flex-col justify-evenly py-2 md:pt-0">
+                <p class="">{{user.username}}</p>
+                <hr class="my-2">
+                <a class="underline" href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-full p-10 overflow-auto">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</body>
+</html>
